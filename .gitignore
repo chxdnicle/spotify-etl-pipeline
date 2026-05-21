@@ -1,0 +1,20 @@
+# Security: Hide Environment Variables
+.env
+
+# Security: Hide Spotipy Authentication Tokens
+.cache
+.cache-*
+
+# Standard Python Ignored Files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments (If someone runs this locally)
+venv/
+.venv/
+env/
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
