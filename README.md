@@ -106,5 +106,4 @@ python dashboard.py
 
 ## 📈 Dashboard Snippet
 
-*(<img width="1917" height="1077" alt="Screenshot 2026-05-21 162130" src="https://github.com/user-attachments/assets/641e39a3-8e2b-4087-a5c8-9186e1a14440" />
-)*
+<img width="1917" height="1077" alt="Screenshot 2026-05-21 162130" src="https://github.com/user-attachments/assets/641e39a3-8e2b-4087-a5c8-9186e1a14440" />
