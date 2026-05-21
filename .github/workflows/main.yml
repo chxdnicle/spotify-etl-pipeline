@@ -1,0 +1,45 @@
+# ==============================================================================
+# NOTE: This is a portfolio copy of the GitHub Actions workflow.
+# The active automation and API secrets are securely hosted in a private repo.
+# ==============================================================================
+
+name: Daily Spotify ETL Pipeline
+
+# When does this run?
+on:
+  schedule:
+    # Runs at midnight UTC every single day
+    - cron: '0 0 * * *'
+  workflow_dispatch: # This allows us to click a "Run" button to test it right now!
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Spotify ETL Script
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
+        run: python spotify_pipeline.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add master_spotify_data.csv .cache
+          git commit -m "Auto-update Spotify Master DB" || echo "No changes to commit"
+          git push
